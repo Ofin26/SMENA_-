@@ -1,0 +1,67 @@
+import telebot
+from telebot import types
+API_TOKEN = '7303278427:AAHrHttT1kezFnVOFCGgv23qIsBShwkoGcI'
+
+bot=telebot.TeleBot(API_TOKEN)
+
+@bot.message_handler(commands=['start','help'])
+def send_welcome(message):
+    markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
+    item=types.KeyboardButton("❓Для чего это нужно")
+    item1=types.KeyboardButton("🏢Магазин")
+    item2=types.KeyboardButton("🗿Кто я")
+    item3 = types.KeyboardButton("😀Извениния")
+    item4=types.KeyboardButton("🦆Ссылка")
+    item5 = types.KeyboardButton("▶Канал")
+    item6 = types.KeyboardButton("🍜 Горячии блюда")
+    item7 = types.KeyboardButton("🦞 Закуски")
+    item8 = types.KeyboardButton("🥂 Напитки")
+    item9 = types.KeyboardButton("🥙 Салаты и холодные блюда")
+    item10 = types.KeyboardButton("🥟 Выпечка и всякая другая фигня")
+    item11 = types.KeyboardButton("🤣 Мемчик")
+    item12 = types.KeyboardButton("🫙 Скоро ...")
+    markup.add(item,item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12)
+    bot.reply_to(message,"Здорово! сейчас посмотри что умеет этот бот по рецптам .\n \n📑 Меню(🍲 Горячии блюда,🦞 Закуски,🥂 Напитки,🥙 Салаты и холодные блюда,🥟 Выпечка и всякая другая фигня). \n❓ Где купить(Магазин) \n ⁉ Кто я(Кто я) \n 😀 Извенения \n ⌨️Ссылка(Ссылка) \n 💽 НЕ МОЙ Канал ( Канал ) ",reply_markup=markup)
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+    if message.text=='🗿Кто я':
+        bot.send_message(message.chat.id,"@RF56890634 найди :)")
+    if message.text == '😀Извениния':
+        bot.send_message(message.chat.id, "Простите что без картинок")
+    if message.text == '🦆Ссылка':
+        bot.send_message(message.chat.id, "https://ovkuse.ru/recipes/doshirak-burger")
+    if message.text == '▶Канал':
+        bot.send_message(message.chat.id, "https://www.youtube.com/@artemiyabramov")
+    if message.text == '🏢Магазин':
+        bot.send_message(message.chat.id, "1. Пятерочка"
+                                          "2. Фикс прайс"
+                                          "3. Монеточка"
+                                          "4. Находка")
+    if message.text=='🍜 Горячии блюда':
+        bot.send_message(message.chat.id,"Дошик с добавками(Доширак , соус , приправы , перец и соль , мясо по вкусу)")
+        bot.send_message(message.chat.id, "Дошик с пельменями (Дошик , Соус , Приправы , Соль и перец и пельмешки)")
+        bot.send_message(message.chat.id, "Мега еда (6 дошираков (желательно разные вкусы) , Колбаса , Квас , Пельмени ")
+        bot.send_message(message.chat.id, "Пельмени от  Копатыча(пельмени в печи)")
+        bot.send_message(message.chat.id, "Карбонара (Доширак , сыр , колбаска )")
+        bot.send_message(message.chat.id, "Ультра микс (Кимчи + говяжий дошик")
+    if message.text=='🦞 Закуски':
+        bot.send_message(message.chat.id,"Сухарики Три корчки ")
+        bot.send_message(message.chat.id, "Чипсы Lays или что то такое")
+        bot.send_message(message.chat.id, "Булки из пятерочки")
+    if message.text=='🥂 Напитки':
+        bot.send_message(message.chat.id,"Лимонад")
+        bot.send_message(message.chat.id, "Классик кола")
+        bot.send_message(message.chat.id, "Чай")
+        bot.send_message(message.chat.id, "Махито")
+    if message.text=='🫙 Скоро ...':
+        bot.send_message(message.chat.id,"Я СКАЗАЛ , СКОРО !")
+    if message.text=='❓Для чего это нужно':
+        bot.send_message(message.chat.id,"Для меня и моих друзей")
+    if message.text=='🥙 Салаты и холодные блюда':
+        bot.send_message(message.chat.id,"Для меня и моих друзей")
+    if message.text=='🥟 Выпечка и всякая другая фигня':
+        bot.send_message(message.chat.id,"Бургер/Бутер")
+        bot.send_message(message.chat.id, "Всякая выпичка")
+    if message.text=='🤣 Мемчик':
+        bot.send_message(message.chat.id,"https://s09.stc.yc.kpcdn.net/share/i/12/12147773/de-1200.jpg")
+bot.infinity_polling()

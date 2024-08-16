@@ -1,0 +1,30 @@
+import turtle
+
+turtlePen = turtle.Turtle()
+window = turtle.Screen()
+
+window.bgcolor("black")
+
+
+def polygon(n, size=10):
+    if n > 2:
+        angle = 360 / n
+
+        for n in range(0, n):
+            turtlePen.left(angle)
+            turtlePen.forward(size)
+
+
+turtlePen.speed(1000)
+
+colors = ['white']
+
+size = 5
+
+for i in range(0,2000):
+    turtlePen.color(colors[i % 1])
+    polygon(4, size)
+    turtlePen.left(2)
+    size = size + 2
+
+window.mainloop()

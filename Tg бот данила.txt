@@ -1,0 +1,103 @@
+import telebot
+from telebot import types
+
+API_TOKEN = '7284872369:AAHVG_cS-Pw7bH89PUpYIUN-gzy8H6-5vUo'
+
+bot = telebot.TeleBot(API_TOKEN)
+
+
+@bot.message_handler(commands=['start','help'])
+def send_welcome(message):
+    markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
+    item=types.KeyboardButton("📖 Меню")
+    item1=types.KeyboardButton("👨🏼‍🍳 Повара")
+    item2=types.KeyboardButton("🍳 Ресторан")
+    item3=types.KeyboardButton("▶ Старт")
+    item4=types.KeyboardButton("🛒 Корзина")
+    markup.add(item,item1,item2, item3, item4)
+    bot.reply_to(message,"📝 Вот список всех команд для бота:\n \n📖 Меню (Посмотреть меню)\n👨🏼‍🍳 Повара (Наше повары)\n🍳 Ресторан (Посмотреть фото нашего ресторана)\n \n📋 Что-бы использовать бота пользуйтесь кнопками.",reply_markup=markup)
+
+
+
+@bot.message_handler(content_types=['text'])
+def send_text(message):
+    a=[]
+
+    af = 0
+    if message.text == '📖 Меню':
+        af = 1
+    if message.text == '🛒 Корзина':
+        bot.send_message(message.chat.id,"🛒 Корзина: ")
+        af = 3
+    if message.text == '▶ Обрадно':
+        bot.send_message(message.chat.id,"📝 Вот список всех команд для бота:\n \n📖 Меню (Посмотреть меню)\n👨🏼‍🍳 Повара (Наше повары)\n🍳 Ресторан (Посмотреть фото нашего ресторана)\n \n📋 Что-бы использовать бота пользуйтесь кнопками.")
+        af = 2
+    if message.text == '🍳 Ресторан':
+        bot.send_message(message.chat.id, "Первая точка в центре москвы: \n \nhttps://women-sekret.ru/wp-content/uploads/2022/03/top-5-best-asian-cafe-restaurants-in-arizona.jpg")
+
+    if af == 1:
+        markup1 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        item1 = types.KeyboardButton("Пица (пеперони)")
+        item2 = types.KeyboardButton("Шаурма (класическая)")
+        item3 = types.KeyboardButton("Роллы (разные)")
+        item4 = types.KeyboardButton("Бургеры (разные)")
+        item5 = types.KeyboardButton("Нагетсы")
+        item6 = types.KeyboardButton("Картошка фри")
+        nazad = types.KeyboardButton("▶ Обрадно")
+        menu = types.KeyboardButton("")
+        markup1.add( item1, item2, item3, item4, item5, item6, nazad, menu)
+        bot.reply_to(message,"https://gas-kvas.com/grafic/uploads/posts/2024-01/gas-kvas-com-p-logotip-pitstsi-na-prozrachnom-fone-22.jpg \n \n 1. Пица (пеперони)\n 2. Шаурма (класическая)\n 3. Роллы (разные)\n 4. Бургеры (разные)\n 5. Нагетсы\n 6. Картошка фри",reply_markup=markup1)
+
+    if af == 2:
+        markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        item = types.KeyboardButton("📖 Меню")
+        item1 = types.KeyboardButton("👨🏼‍🍳 Повара")
+        item2 = types.KeyboardButton("🍳 Ресторан")
+        item3 = types.KeyboardButton("▶ Старт")
+        item4 = types.KeyboardButton("🛒 Корзина")
+        markup2.add(item, item1, item2, item3, item4)
+        bot.reply_to(message,"Что-бы использовать бота пользуйтесь кнопками.",reply_markup=markup2)
+
+    if af == 3:
+        markup3 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        item1 = types.KeyboardButton("🛒 Корзина")
+        item2 = types.KeyboardButton("▶ Обрадно")
+        item3 = types.KeyboardButton("✅ Купить")
+        markup3.add(item3, item2, item1)
+        bot.reply_to(message, "Корзина", reply_markup=markup3)
+        bot.send_message(message.chat.id, a[0])
+    if message.text=="▶ Старт ":
+        bot.send_message(message.chat.id,"📝 Вот список всех команд для бота:\n \n📖 Меню (Посмотреть меню)\n👨🏼‍🍳 Повары (Наше повары)\n🍳 Ресторан (Посмотреть фото нашего ресторана)\n \n📋 Что-бы использовать бота пользуйтесь кнопками.")
+
+    if message.text=='🍳 Ресторан':
+        bot.send_message(message.chat.id,"Вторая точка в центре узбекестана: \n \nhttps://static.tildacdn.com/tild3535-3539-4962-b336-633163373462/KK_pics_1920x1080_12.jpg")
+
+    if message.text=='👨🏼‍🍳 Повара':
+        bot.send_message(message.chat.id,"Наши повара: \n \n1. Шфальц Негер \n2. Адольф Гитлер \n3. Тимур \n 4. Анастасия \n 5. Денис")
+
+    if message.text=='📖 Меню':
+        bot.send_message(message.chat.id,"⬇ Выбрать блюдо можно ниже ⬇")
+
+    if message.text=='✅ Купить':
+        bot.send_message(message.chat.id,"✅ Вы успешно купили товар из корзины.")
+
+    if message.text=='Пица (пеперони)':
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+        a.append("Пица")
+    if message.text=='Шаурма (класическая)':
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+        a.append("Шаурма")
+    if message.text=='Роллы (разные)':
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+        a.append("Роллы")
+    if message.text=='Бургеры (разные)':
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+        a.append("Бургер")
+    if message.text=='Нагетсы':
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+        a.append("Нагетсы")
+    if message.text=='Картошка фри':
+        a.append("Картошка фри")
+        bot.send_message(message.chat.id,"✅ Товар успешно добавлен в корзину ✅")
+
+bot.infinity_polling()
